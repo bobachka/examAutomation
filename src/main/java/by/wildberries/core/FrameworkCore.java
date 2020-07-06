@@ -1,0 +1,29 @@
+package by.wildberries.core;
+
+import by.wildberries.core.utils.BrowserConstants;
+import by.wildberries.core.utils.IOUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class FrameworkCore {
+    private static WebDriver driver;
+
+    public static String browser = IOUtils.loadGenericProperty("browser", "configuration");
+    public static String baseUrl = IOUtils.loadGenericProperty("baseUrl", "configuration");
+
+    public static WebDriver getInstance() {
+        if (browser.equals(BrowserConstants.CHROME)) {
+            driver = new ChromeDriver();
+        } else {
+            if (browser.equals(BrowserConstants.FIREFOX)) {
+                driver = new FirefoxDriver();
+            } else {
+                throw new IllegalArgumentException("Such browser is absent in .properties");
+            }
+        }
+        return driver;
+    }
+
+
+}
