@@ -1,15 +1,13 @@
 package exam.by.wildberries_project.functional.tests;
 
 import exam.by.wildberries_project.functional.entities.helpers.WBHomeHelper;
+import io.qameta.allure.Description;
+import io.qameta.allure.Flaky;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-
-/*Требования к фреймворку:
-        - подключить Allure Report (или др), обеспечить генерацию отчета о прогоне
-        - Настроить CI, позволяющий запускать Ваши авто тесты через Jenkins Job.*/
 
 public class WBSearchTests {
     private WBHomeHelper homeHelper = new WBHomeHelper();
@@ -18,36 +16,42 @@ public class WBSearchTests {
     // конструктор для фабрики
     //public WBSearchTests(String searchKey) {this.searchKey = searchKey;}
 
-    //- поиск по кнопке
+
     @Test
+    @Description(value = "Тест проверяет поиск по кнопке 'Поиск'")
     public void performSearchViaBtn() {
         int countPerPage = homeHelper.searchViaBtn(searchKey).getSearchResultsPerPage();
         System.out.println("Here are results for " + searchKey);
         Assert.assertTrue(countPerPage > 0, "Nothing is found:");
     }
-    //- поиск клавишей энтер
+
     @Test
+    @Description(value = "Тест проверяет поиск клавишей 'Enter'")
     public void performSearchViaEnter() {
         int countPerPage = homeHelper.searchViaEnter(searchKey).getSearchResultsPerPage();
         System.out.println("Here are results for " + searchKey);
         Assert.assertTrue(countPerPage > 0, "Nothing is found:");
     }
-    //- вывод кол-ва резалтов на странице
+
     @Test
+    @Description(value = "Тест проверяет вывод результатов поиска на страницу")
     public void countSearchResultsPerPage() {
         int countPerPage = homeHelper.searchViaBtn(searchKey).getSearchResultsPerPage();
         System.out.println("Results per page for " + searchKey + " are " + countPerPage);
         Assert.assertTrue(countPerPage > 0, "Nothing is found:");
     }
-    //- вывод общего кол-ва результатов
+
     @Test
+    @Description(value = "Тест проверяет вывод общего количесва результатов")
     public void countSearchResultsTotal() {
         int countTotal = homeHelper.searchViaBtn(searchKey).getSearchResultsTotal();
         System.out.println("Total Results for " + searchKey + " are " + countTotal);
         Assert.assertTrue(countTotal > 0, "Nothing is found:");
     }
-    //- тест на невалидное значение + data provider
-    @Test (dataProvider = "nonExistentKeys")
+
+    @Test(dataProvider = "nonExistentKeys")
+    @Flaky
+    @Description(value = "Тест проверяет поиск невалидных значений, использует дата провайдер")
     public void searchNonExistent(String searchKey) {
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsTitleExist();
         Assert.assertTrue(resultsTitle, "Something is found, but should be:");
@@ -58,36 +62,42 @@ public class WBSearchTests {
         return new Object[][]{{"jeans"}, {"белиберда"}, {"tututu"}};
     }
 
-    //- поиск киррилицей
+
     @Test
+    @Description(value = "Тест проверяет поиск кириллицей")
     public void searchCyrillic() {
         String searchKey = "привет";
         int countPerPage = homeHelper.searchViaEnter(searchKey).getSearchResultsPerPage();
         Assert.assertTrue(countPerPage > 0, "Nothing is found:");
     }
-    //- поиск спецсимволов и цифр
+
     @Test
+    @Description(value = "Тест проверяет поиск спецсимволов и цифр")
     public void searchSpecialChars() {
         String searchKey = "!@#$%^&*()_+1234567890";
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsTitleExist();
         Assert.assertTrue(resultsTitle, "Something is found, but shouldn't be:");
     }
-    //- поиск с заменой
+
     @Test
+    @Issue(value = "COVID-19")
+    @Description(value = "Тест проверяет смену раскладки при поиске'")
     public void searchNumbers() {
         String searchKey = "k.,jdm";
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsReplacedExist();
         Assert.assertTrue(resultsTitle, "Key word is not replaced, but shouldn't be:");
     }
-    //- поиск без ввода значения
+
     @Test
+    @Description(value = "Тест проверяет поиск по пустому значению")
     public void searchEmpty() {
         String searchKey = "";
         boolean resultsTitle = homeHelper.searchViaEnter(searchKey).isResultsTitleExist();
         Assert.assertFalse(resultsTitle, "Something is found, but shouldn't be:");
     }
-    //- поиск с максимальным значением
+
     @Test
+    @Description(value = "Тест проверяет ограничение на длину значения в поле поиска")
     public void searchMaxAmount() {
         String searchKey = "qwertqwertqwertqwe20qwertqwertqwertqwe40qwertqwertqwertqwe60qwertqwertqwertqwe80qwertqwertqwertqw100qwertqwertqwertqw120qwertqwertqwertqw140qwertqwertqwertqw160qwertqwertqwertqw180qwertqwertqwertqw200qwertqwertqwertqw220qwertqwertqwertqw240qwertqwertqwertqw220qwertqwertqwertqw280qwertqwertqwertqw300qwertqwertqwertqw320qwertqwertqwertqw340";
         int resultsTitleSize = homeHelper.searchViaEnter(searchKey).getSearchResultsTitleSize();

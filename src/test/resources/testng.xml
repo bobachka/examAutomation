@@ -5,10 +5,10 @@
 <!--это для многопоточного запуска классов-->
     <!--suite name="Acceptance suite" parallel="classes" thread-count="2"-->
 <!--это для обычного запуска-->
-<suite name="Google suite">
+<suite name="Wildberries suite">
     <!--listener для перезапуска упавших тестов/-->
     <listeners>
-        <!--listener class-name="by.wildberries.core.common.AnnotationTransformer"/-->
+        <listener class-name="by.wildberries.core.common.AnnotationTransformer"/>
     </listeners>
     <test verbose="2" name="Wildberries tests">
         <classes>
