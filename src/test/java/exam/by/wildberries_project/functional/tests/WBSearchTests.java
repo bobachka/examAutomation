@@ -25,7 +25,7 @@ public class WBSearchTests {
         Assert.assertTrue(countPerPage > 0, "Nothing is found:");
     }
 
-    @Test
+    /*@Test
     @Description(value = "Тест проверяет поиск клавишей 'Enter'")
     public void performSearchViaEnter() {
         int countPerPage = homeHelper.searchViaEnter(searchKey).getSearchResultsPerPage();
@@ -107,5 +107,5 @@ public class WBSearchTests {
     @AfterTest
     public void tearDown() {
         homeHelper.quit();
-    }
+    }*/
 }
