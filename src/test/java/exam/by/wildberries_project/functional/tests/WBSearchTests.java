@@ -49,6 +49,7 @@ public class WBSearchTests {
     }
 
     @Test(dataProvider = "nonExistentKeys")
+    @Issue(value = "COVID-19")
     @Flaky
     @Description(value = "Тест проверяет поиск невалидных значений, использует дата провайдер")
     public void searchNonExistent(String searchKey) {
@@ -79,7 +80,6 @@ public class WBSearchTests {
     }
 
     @Test
-    @Issue(value = "COVID-19")
     @Description(value = "Тест проверяет смену раскладки при поиске'")
     public void searchNumbers() {
         String searchKey = "k.,jdm";

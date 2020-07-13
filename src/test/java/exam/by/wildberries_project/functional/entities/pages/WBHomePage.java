@@ -8,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 
 public class WBHomePage extends AbstractPage {
     private static String logo = "//a[@class='header-logo']";
-    //private static String logo = "//img[@alt='Wildberries']";
     private static String searchFld = "//input[@id=\"tbSrch\"]";
     private static String searchBtn = "//span[@id=\"btnSrch\"]";
     private static String loginBtn = "//*[@id=\"basketContent\"]/div[2]/a";
@@ -57,13 +56,11 @@ public class WBHomePage extends AbstractPage {
     }
 
     public WBHomePage fillSearchFld(String searchKey) {
-        //        waitForElementVisible(getElementBy(searchField));
         getElement(searchFld).sendKeys(searchKey);
         return getHomePage();
     }
 
     public WBSearchPage clickSearchBtn() {
-        //        waitForElementVisible(getElementBy(searchField));
         getElement(searchBtn).click();
         return WBSearchPage.getSearchPage();
     }

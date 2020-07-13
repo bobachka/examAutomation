@@ -63,7 +63,6 @@ public class WBLoginTests {
         homeHelper.navigateToHomePage();
         homeHelper.clickLoginBtn();
         loginHelper.fillInPhoneField(phoneKey);
-        loginHelper.getValue().equals("301941595");
         System.out.println("Invalid long input in phone field test passed");
         Assert.assertTrue(confirmHelper.displayConfirmPage(), "Long input failed: ");
     }
