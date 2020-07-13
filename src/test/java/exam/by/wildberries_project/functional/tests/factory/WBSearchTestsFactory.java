@@ -7,7 +7,7 @@ public class WBSearchTestsFactory {
     @Factory
     public Object[] factoryMethod() {
         return new Object[]{
-                new WBSearchTestForFactory("платье"), new WBSearchTestForFactory("юбка"), new WBSearchTestForFactory("брюки")
+                new WBSearchTestForFactory("adidas"), new WBSearchTestForFactory("asos"), new WBSearchTestForFactory("nike")
         };
     }
 }
