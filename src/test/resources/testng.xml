@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--это для многопоточного запуска методов в 1 классе-->
-<!--suite name="Acceptance suite" parallel="methods" thread-count="2"-->
-<!--это для многопоточного запуска классов-->
-    <!--suite name="Acceptance suite" parallel="classes" thread-count="2"-->
-<!--это для обычного запуска-->
 <suite name="Wildberries suite">
-    <!--listener для перезапуска упавших тестов/-->
     <listeners>
         <listener class-name="by.wildberries.core.common.AnnotationTransformer"/>
     </listeners>
-    <test verbose="2" name="Wildberries tests">
+
+    <test name="Search tests">
         <classes>
             <class name="exam.by.wildberries_project.functional.tests.WBSearchTests"/>
+        </classes>
+    </test>
+    <test name="Login tests">
+        <classes>
+            <class name="exam.by.wildberries_project.functional.tests.WBLoginTests"/>
+        </classes>
+    </test>
+    <test name="Navigation tests">
+        <classes>
+            <class name="exam.by.wildberries_project.functional.tests.WBNavigationTests"/>
         </classes>
     </test>
 </suite>

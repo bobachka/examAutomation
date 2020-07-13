@@ -4,4 +4,4 @@ out/
 /target/
 *.class
 /allure-report/
-
+/allure-results/

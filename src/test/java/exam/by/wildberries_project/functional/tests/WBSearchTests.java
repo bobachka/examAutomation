@@ -5,7 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Flaky;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -16,13 +16,12 @@ public class WBSearchTests {
     // конструктор для фабрики
     //public WBSearchTests(String searchKey) {this.searchKey = searchKey;}
 
-
     @Test
     @Description(value = "Тест проверяет поиск по кнопке 'Поиск'")
     public void performSearchViaBtn() {
         int countPerPage = homeHelper.searchViaBtn(searchKey).getSearchResultsPerPage();
         System.out.println("Here are results for " + searchKey);
-        Assert.assertTrue(countPerPage > 0, "Nothing is found:");
+        Assert.assertTrue(countPerPage > 0, "Nothing is found: ");
     }
 
     @Test
@@ -30,7 +29,7 @@ public class WBSearchTests {
     public void performSearchViaEnter() {
         int countPerPage = homeHelper.searchViaEnter(searchKey).getSearchResultsPerPage();
         System.out.println("Here are results for " + searchKey);
-        Assert.assertTrue(countPerPage > 0, "Nothing is found:");
+        Assert.assertTrue(countPerPage > 0, "Nothing is found: ");
     }
 
     @Test
@@ -38,7 +37,7 @@ public class WBSearchTests {
     public void countSearchResultsPerPage() {
         int countPerPage = homeHelper.searchViaBtn(searchKey).getSearchResultsPerPage();
         System.out.println("Results per page for " + searchKey + " are " + countPerPage);
-        Assert.assertTrue(countPerPage > 0, "Nothing is found:");
+        Assert.assertTrue(countPerPage > 0, "Nothing is found: ");
     }
 
     @Test
@@ -46,7 +45,7 @@ public class WBSearchTests {
     public void countSearchResultsTotal() {
         int countTotal = homeHelper.searchViaBtn(searchKey).getSearchResultsTotal();
         System.out.println("Total Results for " + searchKey + " are " + countTotal);
-        Assert.assertTrue(countTotal > 0, "Nothing is found:");
+        Assert.assertTrue(countTotal > 0, "Nothing is found: ");
     }
 
     @Test(dataProvider = "nonExistentKeys")
@@ -54,7 +53,7 @@ public class WBSearchTests {
     @Description(value = "Тест проверяет поиск невалидных значений, использует дата провайдер")
     public void searchNonExistent(String searchKey) {
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsTitleExist();
-        Assert.assertTrue(resultsTitle, "Something is found, but should be:");
+        Assert.assertTrue(resultsTitle, "Something is found, but should be: ");
     }
 
     @DataProvider(name = "nonExistentKeys")
@@ -68,7 +67,7 @@ public class WBSearchTests {
     public void searchCyrillic() {
         String searchKey = "привет";
         int countPerPage = homeHelper.searchViaEnter(searchKey).getSearchResultsPerPage();
-        Assert.assertTrue(countPerPage > 0, "Nothing is found:");
+        Assert.assertTrue(countPerPage > 0, "Nothing is found: ");
     }
 
     @Test
@@ -76,7 +75,7 @@ public class WBSearchTests {
     public void searchSpecialChars() {
         String searchKey = "!@#$%^&*()_+1234567890";
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsTitleExist();
-        Assert.assertTrue(resultsTitle, "Something is found, but shouldn't be:");
+        Assert.assertTrue(resultsTitle, "Something is found, but shouldn't be: ");
     }
 
     @Test
@@ -85,7 +84,7 @@ public class WBSearchTests {
     public void searchNumbers() {
         String searchKey = "k.,jdm";
         boolean resultsTitle = homeHelper.searchViaBtn(searchKey).isResultsReplacedExist();
-        Assert.assertTrue(resultsTitle, "Key word is not replaced, but shouldn't be:");
+        Assert.assertTrue(resultsTitle, "Key word is not replaced, but shouldn't be: ");
     }
 
     @Test
@@ -93,7 +92,7 @@ public class WBSearchTests {
     public void searchEmpty() {
         String searchKey = "";
         boolean resultsTitle = homeHelper.searchViaEnter(searchKey).isResultsTitleExist();
-        Assert.assertFalse(resultsTitle, "Something is found, but shouldn't be:");
+        Assert.assertFalse(resultsTitle, "Something is found, but shouldn't be: ");
     }
 
     @Test
@@ -101,10 +100,10 @@ public class WBSearchTests {
     public void searchMaxAmount() {
         String searchKey = "qwertqwertqwertqwe20qwertqwertqwertqwe40qwertqwertqwertqwe60qwertqwertqwertqwe80qwertqwertqwertqw100qwertqwertqwertqw120qwertqwertqwertqw140qwertqwertqwertqw160qwertqwertqwertqw180qwertqwertqwertqw200qwertqwertqwertqw220qwertqwertqwertqw240qwertqwertqwertqw220qwertqwertqwertqw280qwertqwertqwertqw300qwertqwertqwertqw320qwertqwertqwertqw340";
         int resultsTitleSize = homeHelper.searchViaEnter(searchKey).getSearchResultsTitleSize();
-        Assert.assertEquals(resultsTitleSize, 300, "Search result key is not cropped to 300 chars:");
+        Assert.assertEquals(resultsTitleSize, 300, "Search result key is not cropped to 300 chars: ");
     }
 
-    @AfterTest
+    @AfterSuite
     public void tearDown() {
         homeHelper.quit();
     }

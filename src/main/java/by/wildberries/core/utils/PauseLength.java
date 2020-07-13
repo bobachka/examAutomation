@@ -3,7 +3,7 @@ package by.wildberries.core.utils;
 public enum PauseLength {
     MAX(120),
     AVG(30),
-    MIN(5);
+    MIN(10);
 
     private Integer value;
 

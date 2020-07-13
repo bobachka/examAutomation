@@ -3,16 +3,18 @@ package exam.by.wildberries_project.functional.entities.pages;
 import by.wildberries.core.FrameworkCore;
 import by.wildberries.core.utils.PauseLength;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class AbstractPage extends FrameworkCore {
     private static WebDriver driver = getInstance();
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
 
@@ -23,7 +25,7 @@ public class AbstractPage extends FrameworkCore {
 
     public static void waitForElementVisible(final By by) {
         try {
-            WebDriverWait waiter = new WebDriverWait(driver, PauseLength.MAX.value());
+            WebDriverWait waiter = new WebDriverWait(driver, PauseLength.MIN.value());
             waiter.until(ExpectedConditions.presenceOfElementLocated(by));
         } catch (Throwable e) {
             System.out.println(e.getLocalizedMessage());
@@ -73,5 +75,38 @@ public class AbstractPage extends FrameworkCore {
 
     public List<WebElement> getElements(String xpath) {
         return driver.findElements(By.xpath(xpath));
+    }
+
+    public static void wait(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pageRefresh() {
+        driver.navigate().refresh();
+    }
+
+    public void scrollPage() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollBy(0,300)");
+    }
+
+
+    public void changeWindow() {
+        Set<String> handles = driver.getWindowHandles();
+        for (String s : handles) {
+            driver.switchTo().window(s);
+        }
+    }
+
+    public void hoverOnItem(String item) {
+        Actions action = new Actions(getDriver());
+        WebElement element = getElement(item);
+        action.moveToElement(element).perform();
     }
 }
