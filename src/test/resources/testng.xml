@@ -19,4 +19,9 @@
             <class name="exam.by.wildberries_project.functional.tests.WBNavigationTests"/>
         </classes>
     </test>
+    <test name="Factory tests">
+        <classes>
+            <class name="exam.by.wildberries_project.functional.tests.factory.WBSearchTestsFactory"/>
+        </classes>
+    </test>
 </suite>
