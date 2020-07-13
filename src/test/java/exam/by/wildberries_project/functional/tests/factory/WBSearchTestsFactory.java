@@ -1,6 +1,5 @@
 package exam.by.wildberries_project.functional.tests.factory;
 
-import exam.by.wildberries_project.functional.tests.WBSearchTests;
 import org.testng.annotations.Factory;
 
 public class WBSearchTestsFactory {
@@ -8,9 +7,7 @@ public class WBSearchTestsFactory {
     @Factory
     public Object[] factoryMethod() {
         return new Object[]{
-                //new WBSearchTests("платье"), new WBSearchTests("юбка"), new WBSearchTests("брюки")
+                new WBSearchTestForFactory("платье"), new WBSearchTestForFactory("юбка"), new WBSearchTestForFactory("брюки")
         };
     }
-
 }
-

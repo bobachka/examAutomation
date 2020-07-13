@@ -13,9 +13,6 @@ public class WBSearchTests {
     private WBHomeHelper homeHelper = new WBHomeHelper();
     private String searchKey = "jeans";
 
-    // конструктор для фабрики
-    //public WBSearchTests(String searchKey) {this.searchKey = searchKey;}
-
     @Test
     @Description(value = "Тест проверяет поиск по кнопке 'Поиск'")
     public void performSearchViaBtn() {
