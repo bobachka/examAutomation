@@ -73,6 +73,15 @@ public class AbstractPage extends FrameworkCore {
         }
     }
 
+
+    public WebElement getElement(By selector) {
+        try {
+        return driver.findElement(selector);
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
+
     public List<WebElement> getElements(String xpath) {
         return driver.findElements(By.xpath(xpath));
     }
